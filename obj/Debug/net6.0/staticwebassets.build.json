@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vHZVMHZEIDP+aYjMvZ8fq5dpnoB5XPESRmXPcVjr7lQ=",
+  "Hash": "Ci6jms9dR4uGSqN3ejd5YFdw/1F9MgWlKZNSKnHGBpo=",
   "Source": "NewBlazorApp",
   "BasePath": "/",
   "Mode": "Root",
@@ -16,6 +16,40 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\halvd\\.nuget\\packages\\chartjs.blazor.fork\\2.0.2\\contentFiles\\any\\netstandard2.1\\wwwroot\\ChartJsBlazorInterop.js",
+      "SourceId": "NewBlazorApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "ChartJsBlazorInterop.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\halvd\\.nuget\\packages\\chartjs.blazor.fork\\2.0.2\\contentFiles\\any\\netstandard2.1\\wwwroot\\ChartJsBlazorInterop.js"
+    },
+    {
+      "Identity": "C:\\Users\\halvd\\.nuget\\packages\\chartjs.blazor.fork\\2.0.2\\staticwebassets\\ChartJsBlazorInterop.js",
+      "SourceId": "ChartJs.Blazor.Fork",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\halvd\\.nuget\\packages\\chartjs.blazor.fork\\2.0.2\\staticwebassets\\",
+      "BasePath": "_content/ChartJs.Blazor.Fork",
+      "RelativePath": "ChartJsBlazorInterop.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\halvd\\.nuget\\packages\\chartjs.blazor.fork\\2.0.2\\staticwebassets\\ChartJsBlazorInterop.js"
+    },
     {
       "Identity": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\blazor.boot.json",
       "SourceId": "NewBlazorApp",
@@ -49,6 +83,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\halvd\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\6.0.31\\build\\net6.0\\blazor.webassembly.js"
+    },
+    {
+      "Identity": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\ChartJs.Blazor.dll",
+      "SourceId": "NewBlazorApp",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/ChartJs.Blazor.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\halvd\\.nuget\\packages\\chartjs.blazor.fork\\2.0.2\\lib\\netstandard2.1\\ChartJs.Blazor.dll"
     },
     {
       "Identity": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\dotnet.6.0.31.wn2zdosy3l.js",
@@ -695,6 +746,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net6.0\\NewBlazorApp.pdb"
+    },
+    {
+      "Identity": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Newtonsoft.Json.dll",
+      "SourceId": "NewBlazorApp",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Newtonsoft.Json.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\halvd\\.nuget\\packages\\newtonsoft.json\\12.0.3\\lib\\netstandard2.0\\Newtonsoft.Json.dll"
     },
     {
       "Identity": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.AppContext.dll",
@@ -3638,6 +3706,23 @@
       "OriginalItemSpec": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.Win32.Primitives.dll"
     },
     {
+      "Identity": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\obj\\Debug\\net6.0\\build-gz\\2yV7vOSl.gz",
+      "SourceId": "NewBlazorApp",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/ChartJs.Blazor.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\ChartJs.Blazor.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\ChartJs.Blazor.dll"
+    },
+    {
       "Identity": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\obj\\Debug\\net6.0\\build-gz\\35nOr8g1.gz",
       "SourceId": "NewBlazorApp",
       "SourceType": "Computed",
@@ -5166,6 +5251,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Net.ServicePoint.dll"
+    },
+    {
+      "Identity": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\obj\\Debug\\net6.0\\build-gz\\Kd4Wd0md.gz",
+      "SourceId": "NewBlazorApp",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Newtonsoft.Json.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Newtonsoft.Json.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Newtonsoft.Json.dll"
     },
     {
       "Identity": "C:\\Users\\halvd\\Desktop\\Skole_datateknikk\\5_semester\\Store_Datasystemer\\1.1\\NewBlazorApp\\obj\\Debug\\net6.0\\build-gz\\KeR0tW0N.gz",

@@ -9,6 +9,8 @@
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="NewBlazorApp.styles.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
@@ -20,6 +22,43 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+
+
+    <script>
+        function createScatterChart(chartId, dataPoints, xLabel, yLabel) {
+            var ctx = document.getElementById(chartId).getContext('2d');
+            new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Clustered Data',
+                        data: dataPoints,
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: xLabel
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: yLabel
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+    
+      
 </body>
 
 </html>

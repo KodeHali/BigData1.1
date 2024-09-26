@@ -1,14 +1,31 @@
 @page "/algorithm-selection"
 @using NewBlazorApp.Services
 @using NewBlazorApp.Algorithms
+@inject IJSRuntime JSRuntime
+
 @inject DataService DataService
 @inject NavigationManager NavigationManager
 
-<h3>Select Clustering Algorithm and Options</h3>
+<h3>Select Clustering Algorithm and Dimensions</h3>
 
-<!-- PCA Toggle -->
+<!-- Dropdowns for selecting dimensions -->
 <div>
-    <input type="checkbox" @bind="ApplyPca" /> Apply PCA before clustering
+    <label for="xDimension">X Dimension:</label>
+    <select id="xDimension" @bind="selectedXDimension">
+        @foreach (var column in DataService.CsvData.Headers)
+        {
+            <option value="@column">@column</option>
+        }
+    </select>
+</div>
+<div>
+    <label for="yDimension">Y Dimension:</label>
+    <select id="yDimension" @bind="selectedYDimension">
+        @foreach (var column in DataService.CsvData.Headers)
+        {
+            <option value="@column">@column</option>
+        }
+    </select>
 </div>
 
 <!-- Algorithm Selection -->
@@ -16,90 +33,120 @@
     <label for="algorithm">Choose an algorithm:</label>
     <select id="algorithm" @bind="SelectedAlgorithm">
         <option value="kmeans">K-Means Clustering</option>
-        <option value="meanshift">Mean Shift Clustering</option>
-        <option value="birch">BIRCH Clustering</option>
-        <option value="ward">Ward Clustering</option>
-        <option value="dbscan">DBSCAN Clustering</option>
+        <!-- Add other algorithms here -->
     </select>
 </div>
 
 <!-- Run Clustering Button -->
 <button class="btn btn-primary" @onclick="RunClustering">Run Clustering</button>
 
-<p>@ClusteringStatus</p>
-
-@if (ClusteredData != null)
-{
-    <h4>Cluster Results</h4>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                @foreach (var header in DataService.CsvData.Headers)
-                {
-                    <th>@header</th>
-                }
-                <th>Cluster</th> <!-- To show the cluster ID -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var row in ClusteredData)
-            {
-                <tr>
-                    @foreach (var cell in row.Data)
-                    {
-                        <td>@cell</td>
-                    }
-                    <td>@row.Cluster</td> <!-- Show the cluster assignment -->
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+<!-- Chart container -->
+<canvas id="clusterChart" width="600" height="400"></canvas>
 
 @code {
-    private bool ApplyPca { get; set; } = false;
+    private string selectedXDimension = "";
+    private string selectedYDimension = "";
     private string SelectedAlgorithm { get; set; } = "kmeans"; // Default algorithm
-    private string ClusteringStatus { get; set; } = "";
-    private List<ClusteredRow>? ClusteredData { get; set; }
 
-    // Clustered row with data and cluster ID
+    private List<ClusteredRow> ClusteredData { get; set; }
+
     public class ClusteredRow
     {
-        public List<string> Data { get; set; } = new List<string>();
+        public double X { get; set; }
+        public double Y { get; set; }
         public int Cluster { get; set; }
     }
 
-    // Function to run clustering based on the selected algorithm and PCA toggle
-    private void RunClustering()
+    private async Task RunClustering()
+{
+    try
     {
-        ClusteringStatus = $"Running {SelectedAlgorithm} algorithm...";
+        Console.WriteLine("Starting clustering...");
 
-        var dataset = DataService.CsvData.Rows.Select(row => row.Select(double.Parse).ToArray()).ToList();
+        // Dictionary for storing label encodings for categorical columns
+        var encodingDictionaries = new Dictionary<int, Dictionary<string, double>>();
 
-        if (ApplyPca)
+        // Prepare dataset (loop through every row and convert non-numeric columns)
+        var dataset = DataService.CsvData.Rows
+            .Select(row =>
+            {
+                var encodedRow = new List<double>();
+
+                for (int i = 0; i < row.Count; i++)
+                {
+                    double numericValue;
+
+                    // Try to parse the value as a number
+                    if (double.TryParse(row[i], out numericValue))
+                    {
+                        encodedRow.Add(numericValue); // Numeric value
+                    }
+                    else
+                    {
+                        // It's a categorical (string) value, so we label encode it
+                        if (!encodingDictionaries.ContainsKey(i))
+                        {
+                            // Create a new dictionary for this column if not already created
+                            encodingDictionaries[i] = new Dictionary<string, double>();
+                        }
+
+                        // Check if the value already has a label, if not, assign a new one
+                        if (!encodingDictionaries[i].ContainsKey(row[i]))
+                        {
+                            // Assign a new numeric value for this category
+                            encodingDictionaries[i][row[i]] = encodingDictionaries[i].Count;
+                        }
+
+                        // Use the encoded value for this categorical value
+                        encodedRow.Add(encodingDictionaries[i][row[i]]);
+                    }
+                }
+
+                return encodedRow.ToArray(); // Convert the list to an array of doubles
+            })
+            .ToList();
+
+        Console.WriteLine("Dataset prepared for clustering...");
+
+        // Check if dataset is empty
+        if (dataset.Count == 0)
         {
-            dataset = ApplyPcaToData(dataset); // Apply PCA if checkbox is selected
-            ClusteringStatus += " PCA applied before clustering.";
+            throw new Exception("No valid data available for clustering");
         }
 
-        // Run selected clustering algorithm (add your actual algorithm logic here)
-        ClusteredData = SelectedAlgorithm switch
+        // Run KMeans (or other selected algorithm)
+        var kmeans = new KMeans();
+        var clusters = kmeans.Cluster(dataset, 3); // Assuming k=3 for example
+
+        Console.WriteLine("Clustering completed...");
+
+        // Prepare the ClusteredData for visualization (just using the first two dimensions for the scatter plot)
+        ClusteredData = dataset.Select((data, index) => new ClusteredRow
         {
-            "kmeans" => new KMeans().Cluster(dataset, 3).Select((cluster, index) => new ClusteredRow { Data = dataset[index].Select(d => d.ToString()).ToList(), Cluster = cluster }).ToList(),
-            "meanshift" => new MeanShift().Cluster(dataset).Select((cluster, index) => new ClusteredRow { Data = dataset[index].Select(d => d.ToString()).ToList(), Cluster = cluster }).ToList(),
-            "birch" => new Birch().Cluster(dataset).Select((cluster, index) => new ClusteredRow { Data = dataset[index].Select(d => d.ToString()).ToList(), Cluster = cluster }).ToList(),
-            "ward" => new Ward().Cluster(dataset).Select((cluster, index) => new ClusteredRow { Data = dataset[index].Select(d => d.ToString()).ToList(), Cluster = cluster }).ToList(),
-            "dbscan" => new Dbscan().Cluster(dataset, 0.5, 5).Select((cluster, index) => new ClusteredRow { Data = dataset[index].Select(d => d.ToString()).ToList(), Cluster = cluster }).ToList(),
-            _ => new List<ClusteredRow>()
-        };
+            X = data[0], // First dimension (X axis)
+            Y = data[1], // Second dimension (Y axis)
+            Cluster = clusters[index] // Cluster assignment
+        }).ToList();
 
-        ClusteringStatus = $"Clustering completed using {SelectedAlgorithm}.";
+        Console.WriteLine("ClusteredData populated...");
+
+        // Create scatter plot data points in {x, y} format for Chart.js
+        var dataPoints = ClusteredData.Select(row => new
+        {
+            x = row.X,
+            y = row.Y
+        }).ToArray();
+
+        Console.WriteLine("Calling JavaScript function to create scatter plot...");
+
+        // Call the JavaScript function to render the chart
+        await JSRuntime.InvokeVoidAsync("createScatterChart", "clusterChart", dataPoints, selectedXDimension, selectedYDimension);
     }
-
-    // PCA algorithm placeholder (replace with actual PCA logic)
-    private List<double[]> ApplyPcaToData(List<double[]> data)
+    catch (Exception ex)
     {
-        // Apply PCA here and return reduced data
-        return data.Select(row => row.Take(2).ToArray()).ToList(); // Example: Reduce to 2 dimensions
+        Console.WriteLine($"Error in clustering: {ex.Message}");
     }
 }
+
+}
+
