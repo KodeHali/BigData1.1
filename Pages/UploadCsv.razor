@@ -1,0 +1,60 @@
+@page "/upload-csv"
+@using NewBlazorApp.Services  
+@inject DataService DataService
+@inject NavigationManager NavigationManager
+
+<h3>Upload CSV File</h3>
+
+<InputFile OnChange="HandleFileSelected" />
+<p>@Status</p>
+
+@code {
+    private string Status { get; set; } = "Please upload a CSV file.";
+
+    // Handle file upload
+    private async Task HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            var file = e.File; 
+            if (file != null)
+            {
+                Status = "Processing file...";
+                var stream = file.OpenReadStream();
+                var data = await ParseCsvAsync(stream);
+                DataService.CsvData = data; // Store the CSV data in the service
+
+                Status = "File uploaded successfully!";
+                NavigationManager.NavigateTo("/algorithm-selection"); // Redirect to the algorithm selection page
+            }
+        }
+        catch (Exception ex)
+        {
+            Status = $"Error: {ex.Message}";
+        }
+    }
+
+    // CSV parsing logic (parses the CSV into rows and columns)
+    private async Task<CsvData> ParseCsvAsync(Stream fileStream)
+    {
+        using var reader = new StreamReader(fileStream);
+        var csvData = new CsvData();
+
+        // Read headers (first row)
+        var headers = await reader.ReadLineAsync();
+        if (headers != null)
+        {
+            csvData.Headers = headers.Split(',').ToList();
+        }
+
+        // Read rows
+        string? line;
+        while ((line = await reader.ReadLineAsync()) != null)
+        {
+            var row = line.Split(',').ToList();
+            csvData.Rows.Add(row);
+        }
+
+        return csvData;
+    }
+}
